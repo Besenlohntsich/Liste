@@ -2,34 +2,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Listenverwaltung<T> {
-    private Map<String, List<T>> stacks;
+    private Map<String, Liste<T>> listen;
 
     public Listenverwaltung() {
-        stacks = new HashMap<>();
+        listen = new HashMap<>();
     }
 
     public void erstelleStack(String name) {
-        stacks.put(name, new List<>());
+        listen.put(name, new Liste<>());
     }
 
     public void push(String name, T element) {
-        List<T> stack = stacks.get(name);
-        if (stack != null) {
-            stack.push(element);
+        Liste<T> liste = listen.get(name);
+        if (liste != null) {
+            liste.append(element);
         }
     }
 
     public T peek(String name) {
-        List<T> stack = stacks.get(name);
-        return stack != null ? stack.peek() : null;
+        Liste<T> liste = listen.get(name);
+        if (liste != null && !liste.isEmpty()) {
+            liste.toLast();
+            return liste.getContent();
+        }
+        return null;
     }
 
     public T pop(String name) {
-        List<T> stack = stacks.get(name);
-        return stack != null ? stack.pop() : null;
+        Liste<T> liste = listen.get(name);
+        if (liste != null && !liste.isEmpty()) {
+            liste.toLast();
+            T element = liste.getContent();
+            liste.remove();
+            return element;
+        }
+        return null;
     }
 
-    public List<T> getStack(String name) {
-        return lists.get(name);
+    public Liste<T> getList(String name) {
+        return listen.get(name);
     }
 }
