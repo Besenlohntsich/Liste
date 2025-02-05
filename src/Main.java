@@ -11,10 +11,10 @@ public class Main {
         while (running) {
             System.out.println("\nBitte wählen Sie eine Option:");
             System.out.println("1. Neue Liste erstellen");
-            System.out.println("2. Element am Ende hinzufügen (Push)");
+            System.out.println("2. Element am Ende hinzufügen ");
             System.out.println("3. Element an bestimmter Position einfügen");
-            System.out.println("4. Oberstes Element anzeigen (Peek)");
-            System.out.println("5. Oberstes Element entfernen (Pop)");
+            System.out.println("4. Oberstes Element anzeigen ");
+            System.out.println("5. Oberstes Element entfernen ");
             System.out.println("6. Element an bestimmter Position entfernen");
             System.out.println("7. Alle Elemente einer Liste anzeigen");
             System.out.println("8. Beenden");
@@ -42,7 +42,7 @@ public class Main {
                     String nameZumEinfuegen = scanner.nextLine();
                     System.out.print("Geben Sie das Element ein: ");
                     String elementZumEinfuegen = scanner.nextLine();
-                    System.out.print("Geben Sie die Position zum Einfügen ein: ");
+                    System.out.print("Geben Sie die Position zum Einfügen ein(das erste element ist 0): ");
                     int positionZumEinfuegen = scanner.nextInt();
                     scanner.nextLine(); // Verbrauche den Zeilenumbruch
                     listenVerwaltung.insertAt(nameZumEinfuegen, elementZumEinfuegen, positionZumEinfuegen);
@@ -84,7 +84,7 @@ public class Main {
                 case 7:
                     System.out.print("Geben Sie den Namen der Liste ein: ");
                     String nameZumAusgeben = scanner.nextLine();
-                    Liste<String> liste = listenVerwaltung.getList(nameZumAusgeben);
+                    List<String> liste = listenVerwaltung.getList(nameZumAusgeben);
                     if (liste != null) {
                         System.out.println("Elemente in der Liste '" + nameZumAusgeben + "':");
                         liste.ausgeben();

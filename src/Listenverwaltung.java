@@ -1,45 +1,70 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Listenverwaltung<T> {
-    private Map<String, Liste<T>> listen;
+public class Listenverwaltung<ContentType> {
+    private Map<String, List<ContentType>> lists;
 
     public Listenverwaltung() {
-        listen = new HashMap<>();
+        lists = new HashMap<>();
     }
 
     public void erstelleStack(String name) {
-        listen.put(name, new Liste<>());
+        lists.put(name, new List<>());
     }
 
-    public void push(String name, T element) {
-        Liste<T> liste = listen.get(name);
-        if (liste != null) {
-            liste.append(element);
+    public void push(String name, ContentType element) {
+        List<ContentType> list = lists.get(name);
+        if (list != null) {
+            list.append(element);
         }
     }
 
-    public T peek(String name) {
-        Liste<T> liste = listen.get(name);
-        if (liste != null && !liste.isEmpty()) {
-            liste.toLast();
-            return liste.getContent();
-        }
-        return null;
-    }
-
-    public T pop(String name) {
-        Liste<T> liste = listen.get(name);
-        if (liste != null && !liste.isEmpty()) {
-            liste.toLast();
-            T element = liste.getContent();
-            liste.remove();
-            return element;
+    public ContentType peek(String name) {
+        List<ContentType> list = lists.get(name);
+        if (list != null && list.hasAccess()) {
+            return list.getContent();
         }
         return null;
     }
 
-    public Liste<T> getList(String name) {
-        return listen.get(name);
+    public ContentType pop(String name) {
+        List<ContentType> list = lists.get(name);
+        if (list != null && list.hasAccess()) {
+            ContentType content = list.getContent();
+            list.remove();
+            return content;
+        }
+        return null;
+    }
+
+    public List<ContentType> getList(String name) {
+        return lists.get(name);
+    }
+
+    public void insertAt(String name, ContentType element, int position) {
+        List<ContentType> list = lists.get(name);
+        if (list != null) {
+            list.toFirst();
+            for (int i = 0; i < position && list.hasAccess(); i++) {
+                list.next();
+            }
+            list.insert(element);
+        }
+    }
+
+    public ContentType removeAt(String name, int position) {
+        List<ContentType> list = lists.get(name);
+        if (list != null) {
+            list.toFirst();
+            for (int i = 0; i < position && list.hasAccess(); i++) {
+                list.next();
+            }
+            if (list.hasAccess()) {
+                ContentType content = list.getContent();
+                list.remove();
+                return content;
+            }
+        }
+        return null;
     }
 }
