@@ -20,7 +20,7 @@ public class Main {
             System.out.println("8. Beenden");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Verbrauche den Zeilenumbruch
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
