@@ -32,7 +32,7 @@ public class Main {
                 case 1:
                     System.out.print("Geben Sie den Namen der neuen Liste ein: ");
                     String listeName = scanner.nextLine();
-                    listenVerwaltung.erstelleStack(listeName);
+                    listenVerwaltung.erstelleList(listeName);
                     System.out.println("Liste '" + listeName + "' erstellt.");
                     break;
                 case 2:
