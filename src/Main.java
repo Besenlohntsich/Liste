@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+
+/**
+ * Die Klasse Main implementiert eine Benutzeroberfläche für die Listenverwaltung.
+ * Sie bietet ein menügesteuertes Interface, über das der Benutzer verschiedene Operationen
+ * mit den Listen ausführen kann.
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -16,7 +22,7 @@ public class Main {
             System.out.println("4. Oberstes Element anzeigen ");
             System.out.println("5. Oberstes Element entfernen ");
             System.out.println("6. Element an bestimmter Position entfernen");
-            System.out.println("7. Alle Elemente einer Liste anzeigen");
+            System.out.println("7. Alle Elemente einer Liste anzeigen(vorne nach hinten)");
             System.out.println("8. Beenden");
 
             int choice = scanner.nextInt();

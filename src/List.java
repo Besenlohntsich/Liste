@@ -1,33 +1,7 @@
 public class List<ContentType> {
-    private class Node {
-        private ContentType content;
-        private Node next;
-
-        public Node(ContentType pContent) {
-            content = pContent;
-            next = null;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node pNext) {
-            next = pNext;
-        }
-
-        public ContentType getContent() {
-            return content;
-        }
-
-        public void setContent(ContentType pContent) {
-            content = pContent;
-        }
-    }
-
-    private Node first;
-    private Node current;
-    private Node last;
+    private Knoten<ContentType> first;
+    private Knoten<ContentType> current;
+    private Knoten<ContentType> last;
 
     public List() {
         first = null;
@@ -53,74 +27,74 @@ public class List<ContentType> {
 
     public void next() {
         if (hasAccess()) {
-            current = current.getNext();
+            current = current.getNaechster();
         }
     }
 
     public void insert(ContentType pContent) {
-        Node newNode = new Node(pContent);
+        Knoten<ContentType> newKnoten = new Knoten<>(pContent);
         if (isEmpty()) {
-            first = newNode;
-            last = newNode;
-            current = newNode;
+            first = newKnoten;
+            last = newKnoten;
+            current = newKnoten;
         } else if (current == first) {
-            newNode.setNext(first);
-            first = newNode;
-            current = newNode;
+            newKnoten.setNaechster(first);
+            first = newKnoten;
+            current = newKnoten;
         } else {
-            Node previous = first;
-            while (previous.getNext() != current) {
-                previous = previous.getNext();
+            Knoten<ContentType> previous = first;
+            while (previous.getNaechster() != current) {
+                previous = previous.getNaechster();
             }
-            newNode.setNext(current);
-            previous.setNext(newNode);
-            current = newNode;
+            newKnoten.setNaechster(current);
+            previous.setNaechster(newKnoten);
+            current = newKnoten;
         }
     }
 
     public void append(ContentType pContent) {
-        Node newNode = new Node(pContent);
+        Knoten<ContentType> newKnoten = new Knoten<>(pContent);
         if (isEmpty()) {
-            first = newNode;
-            last = newNode;
-            current = newNode;
+            first = newKnoten;
+            last = newKnoten;
+            current = newKnoten;
         } else {
-            last.setNext(newNode);
-            last = newNode;
+            last.setNaechster(newKnoten);
+            last = newKnoten;
         }
     }
 
     public void remove() {
         if (hasAccess()) {
             if (current == first) {
-                first = first.getNext();
+                first = first.getNaechster();
                 if (first == null) {
                     last = null;
                 }
             } else {
-                Node previous = first;
-                while (previous.getNext() != current) {
-                    previous = previous.getNext();
+                Knoten<ContentType> previous = first;
+                while (previous.getNaechster() != current) {
+                    previous = previous.getNaechster();
                 }
-                previous.setNext(current.getNext());
+                previous.setNaechster(current.getNaechster());
                 if (current == last) {
                     last = previous;
                 }
             }
-            current = current.getNext();
+            current = current.getNaechster();
         }
     }
 
     public ContentType getContent() {
         if (hasAccess()) {
-            return current.getContent();
+            return current.getDaten();
         }
         return null;
     }
 
     public void setContent(ContentType pContent) {
         if (hasAccess()) {
-            current.setContent(pContent);
+            current.setDaten(pContent);
         }
     }
 
@@ -131,7 +105,7 @@ public class List<ContentType> {
                 last = pList.last;
                 current = null;
             } else {
-                last.setNext(pList.first);
+                last.setNaechster(pList.first);
                 last = pList.last;
             }
             pList.first = null;
@@ -141,10 +115,10 @@ public class List<ContentType> {
     }
 
     public void ausgeben() {
-        Node temp = first;
+        Knoten<ContentType> temp = first;
         while (temp != null) {
-            System.out.println(temp.getContent());
-            temp = temp.getNext();
+            System.out.println(temp.getDaten());
+            temp = temp.getNaechster();
         }
     }
 }
