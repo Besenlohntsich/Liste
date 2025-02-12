@@ -21,7 +21,7 @@ public class List<ContentType> {
         current = first;
     }
 
-    public void toLast() {
+    private void toLast() {
         current = last;
     }
 
